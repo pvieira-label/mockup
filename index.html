@@ -2,22 +2,40 @@
 <html>
 <head>
 	<title>Delta Q Testes</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
+	<style href="flexslider.css">
 	<style>
-		img {
+		video {
 			position: absolute;
-			top: 100px;
-			left: 50px;
+			top: 0px;
+			left: 0px;
 			z-index: 100;
 		}
 
-		video {
+		.flexslider {
 			z-index: 1;
 		}
 	</style>
+	  <!-- jQuery -->
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+	<script src="jquery.flexslider-min.js"
 </head>
 <body>
-	<img src="arrow.png">
+	<div class="flexslider">
+		<ul class="slides">
+			<li>
+				<img src="slide1.png" />
+			</li><li>
+				<img src="slide2.png" />
+			</li><li>
+				<img src="slide3.png" />
+			</li><li>
+				<img src="slide4.png" />
+			</li>
+		</ul>
+	</div>
 	<video width="100%" height="auto" autoplay></video>
 	<script>
 
@@ -53,15 +71,7 @@
 							}]
 						}
 					};
-/*
-				var hdConstraints = {
-					video: {
-				      optional: [{
-				        sourceId: videoSource
-				      }]
-				    }
-				}
-*/
+					
 				navigator.getUserMedia(
 					hdConstraints, 
 					function(stream) {
