@@ -30,6 +30,7 @@
                           navigator.mozGetUserMedia ||
                           navigator.msGetUserMedia;
 
+/*
             var videoSource;
 
             function gotSources(sourceInfos) {				
@@ -47,7 +48,7 @@
 			} else {
 				MediaStreamTrack.getSources(gotSources);
 			}
-
+*/
 			var video = document.querySelector('video'),
 			/*
 				hdConstraints = {
@@ -61,7 +62,7 @@
 							minHeight: 720
 						},
 						optional: [{
-					    	sourceId: videoSource
+					    	sourceId: 'camera 2'
 					    }]
 					}
 				};
