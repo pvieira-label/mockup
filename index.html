@@ -33,8 +33,16 @@
 		if (navigator.getUserMedia) {
 			function gotSources(sourceInfos) {
 				var videoSource = "",
-					video = document.querySelector('video'),			
-					hdConstraints = {
+					video = document.querySelector('video');					
+
+				for (var i = 0; i !== sourceInfos.length; ++i) {
+					var sourceInfo = sourceInfos[i];
+					if (sourceInfo.kind === 'video') {
+						videoSource = sourceInfo.label;
+					}
+				}	
+
+				var hdConstraints = {
 						video: {
 							mandatory: {
 								minWidth: 1280,
@@ -45,13 +53,6 @@
 							sourceId: videoSource
 						}
 					};
-
-				for (var i = 0; i !== sourceInfos.length; ++i) {
-					var sourceInfo = sourceInfos[i];
-					if (sourceInfo.kind === 'video') {
-						videoSource = sourceInfo.label;
-					}
-				}				
 
 				navigator.getUserMedia(
 					hdConstraints, 
