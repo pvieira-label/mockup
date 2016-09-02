@@ -20,7 +20,8 @@
 	  <!-- jQuery -->
   	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
-	<script src="jquery.flexslider-min.js"
+
+	<script src="jquery.flexslider-min.js"></script>
 </head>
 <body>
 	<div class="flexslider">
@@ -71,7 +72,7 @@
 							}]
 						}
 					};
-					
+
 				navigator.getUserMedia(
 					hdConstraints, 
 					function(stream) {
@@ -87,6 +88,13 @@
 			alert("browser não suporta API")
 		}
 			
+
+		$(window).load(function() {
+			$('.flexslider').flexslider({
+		    	animation: "slide"
+		  	});
+		});
+
 	</script>
 </body>
 </html>
