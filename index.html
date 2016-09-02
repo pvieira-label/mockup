@@ -41,7 +41,7 @@
 						videoSource = sourceInfo.label;
 					}
 				}	
-
+/*
 				var hdConstraints = {
 						video: {
 							mandatory: {
@@ -53,6 +53,14 @@
 							}]
 						}
 					};
+*/
+				var hdConstraints = {
+					video: {
+				      optional: [{
+				        sourceId: videoSource
+				      }]
+				    }
+				}
 
 				navigator.getUserMedia(
 					hdConstraints, 
