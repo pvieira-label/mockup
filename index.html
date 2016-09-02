@@ -50,7 +50,12 @@
 			}
 */
 			function gotSources(sourceInfos) {
-				console.log(sourceInfos);
+				for (var i = 0; i !== sourceInfos.length; ++i) {
+					var sourceInfo = sourceInfos[i];
+					if (sourceInfo.kind === 'video') {
+						console.log(sourceInfo.label);
+					}
+				}				
 			}
 
 			MediaStreamTrack.getSources(gotSources);
