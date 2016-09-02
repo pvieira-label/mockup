@@ -23,38 +23,30 @@
 
 			var errorCallback = function(e) {
 				alert("Fui rejeitado. :'(");				
-			};
-
-			MediaStreamTrack.getSources(function(sourceInfos) {
-			  var audioSource = null;
-			  var videoSource = null;
-
-			  for (var i = 0; i != sourceInfos.length; ++i) {
-			    var sourceInfo = sourceInfos[i];
-			    if (sourceInfo.kind === 'audio') {
-			      console.log(sourceInfo.id, sourceInfo.label || 'microphone');
-
-			      audioSource = sourceInfo.id;
-			    } else if (sourceInfo.kind === 'video') {
-			      console.log(sourceInfo.id, sourceInfo.label || 'camera');
-
-			      videoSource = sourceInfo.id;
-			    } else {
-			      console.log('Some other kind of source: ', sourceInfo);
-			    }
-			  }
-
-			  sourceSelected(audioSource, videoSource);
-			});
-
+			};			
 
 			navigator.getUserMedia  = navigator.getUserMedia ||
                           navigator.webkitGetUserMedia ||
                           navigator.mozGetUserMedia ||
                           navigator.msGetUserMedia;
 
+            var videoSource;
 
-            alert(videoSource);
+            function gotSources(sourceInfos) {				
+				for (var i = 0; i !== sourceInfos.length; ++i) {
+					var sourceInfo = sourceInfos[i];
+					if (sourceInfo.kind === 'video') {
+						videoSource = sourceInfo.label;
+					}
+				}
+			}
+
+			if (typeof MediaStreamTrack === 'undefined' ||
+				typeof MediaStreamTrack.getSources === 'undefined') {
+				alert('This browser does not support MediaStreamTrack.\n\nTry Chrome.');
+			} else {
+				MediaStreamTrack.getSources(gotSources);
+			}
 
 			var video = document.querySelector('video'),
 			/*
@@ -67,13 +59,10 @@
 						mandatory: {
 							minWidth: 1280,
 							minHeight: 720
-						}/*,
-						optional: {
-							{
-								sourceId: videoSource
-							}
-						}
-						*/
+						},
+						optional: [{
+					    	sourceId: videoSource
+					    }]
 					}
 				};
 			
