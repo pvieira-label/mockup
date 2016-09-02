@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Delta Q Testes</title>
+</head>
+<body>
+	<video autoplay></video>
+	<script>
+
+			var errorCallback = function(e) {
+				alert("Fui rejeitado. :'(");				
+			};
+
+			navigator.getUserMedia  = navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+
+			var video = document.querySelector('video'),
+			/*
+				hdConstraints = {
+					video: true
+				}
+			*/
+				hdConstraints = {
+					video: {
+						mandatory: {
+							minWidth: 1280,
+							minHeight: 720
+						}
+					}
+				};
+			
+			if (navigator.getUserMedia) {
+				navigator.getUserMedia(
+					hdConstraints, 
+					function(stream) {
+			    		video.src = window.URL.createObjectURL(stream);
+			  		}, 
+			  		errorCallback
+			  	);
+			} else {
+				alert("browser não suporta API")
+				//video.src = 'somevideo.webm'; // fallback.
+			}
+			
+
+			/*
+			// Not showing vendor prefixes.
+			navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
+				var video = document.querySelector('video');
+				video.src = window.URL.createObjectURL(localMediaStream);
+
+				// Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+				// See crbug.com/110938.
+				video.onloadedmetadata = function(e) {
+				  // Ready to go. Do some stuff.
+				};
+			}, errorCallback);
+			*/
+	</script>
+</body>
+</html>
