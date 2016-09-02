@@ -30,61 +30,29 @@
                           navigator.mozGetUserMedia ||
                           navigator.msGetUserMedia;
 
-/*
-            var videoSource;
-
-            function gotSources(sourceInfos) {				
-				for (var i = 0; i !== sourceInfos.length; ++i) {
-					var sourceInfo = sourceInfos[i];
-					if (sourceInfo.kind === 'video') {
-						videoSource = sourceInfo.label;
-					}
-				}
-			}
-
-			if (typeof MediaStreamTrack === 'undefined' ||
-				typeof MediaStreamTrack.getSources === 'undefined') {
-				alert('This browser does not support MediaStreamTrack.\n\nTry Chrome.');
-			} else {
-				MediaStreamTrack.getSources(gotSources);
-			}
-*/
-
-			var videoSource = "";
-
+		if (navigator.getUserMedia) {
 			function gotSources(sourceInfos) {
+				var videoSource = "",
+					video = document.querySelector('video'),			
+					hdConstraints = {
+						video: {
+							mandatory: {
+								minWidth: 1280,
+								minHeight: 720
+							}
+						},
+						optional: {
+							sourceId: videoSource
+						}
+					};
+
 				for (var i = 0; i !== sourceInfos.length; ++i) {
 					var sourceInfo = sourceInfos[i];
 					if (sourceInfo.kind === 'video') {
 						videoSource = sourceInfo.label;
 					}
 				}				
-			}
 
-			MediaStreamTrack.getSources(gotSources);
-
-
-			alert(videoSource);
-			
-			var video = document.querySelector('video'),
-			/*
-				hdConstraints = {
-					video: true
-				}
-			*/
-				hdConstraints = {
-					video: {
-						mandatory: {
-							minWidth: 1280,
-							minHeight: 720
-						}
-					},
-					optional: {
-						sourceId: videoSource
-					}
-				};
-			
-			if (navigator.getUserMedia) {
 				navigator.getUserMedia(
 					hdConstraints, 
 					function(stream) {
@@ -92,25 +60,14 @@
 			  		}, 
 			  		errorCallback
 			  	);
-			} else {
-				alert("browser não suporta API")
-				//video.src = 'somevideo.webm'; // fallback.
 			}
+
+			MediaStreamTrack.getSources(gotSources);
+		
+		} else {
+			alert("browser não suporta API")
+		}
 			
-
-			/*
-			// Not showing vendor prefixes.
-			navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
-				var video = document.querySelector('video');
-				video.src = window.URL.createObjectURL(localMediaStream);
-
-				// Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
-				// See crbug.com/110938.
-				video.onloadedmetadata = function(e) {
-				  // Ready to go. Do some stuff.
-				};
-			}, errorCallback);
-			*/
 	</script>
 </body>
 </html>
