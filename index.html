@@ -49,11 +49,14 @@
 				MediaStreamTrack.getSources(gotSources);
 			}
 */
+
+			var videoSource = "";
+
 			function gotSources(sourceInfos) {
 				for (var i = 0; i !== sourceInfos.length; ++i) {
 					var sourceInfo = sourceInfos[i];
 					if (sourceInfo.kind === 'video') {
-						alert(sourceInfo.label);
+						videoSource = sourceInfo.label;
 					}
 				}				
 			}
@@ -72,6 +75,9 @@
 							minWidth: 1280,
 							minHeight: 720
 						}
+					},
+					optional: {
+						sourceId: videoSource
 					}
 				};
 			
