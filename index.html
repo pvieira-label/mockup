@@ -53,6 +53,9 @@
                           navigator.mozGetUserMedia ||
                           navigator.msGetUserMedia;
 
+
+            alert(videoSource);
+
 			var video = document.querySelector('video'),
 			/*
 				hdConstraints = {
@@ -64,12 +67,13 @@
 						mandatory: {
 							minWidth: 1280,
 							minHeight: 720
-						},
+						}/*,
 						optional: {
 							{
 								sourceId: videoSource
 							}
 						}
+						*/
 					}
 				};
 			
