@@ -86,7 +86,11 @@
 			alert("browser não suporta API")
 		}
 			
-		console.log($('video').length);
+		$('video').css({
+			'position': 'absolute',
+			'top': 0,
+			'left': 0
+		})
 
 		$(window).load(function() {
 			$('.flexslider').flexslider({
